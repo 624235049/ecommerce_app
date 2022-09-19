@@ -3,9 +3,11 @@ import 'light_color.dart';
 
 class AppTheme {
   const AppTheme();
- 
 
-  static final Color textColor = const Color(0xFF89dad0);
+  static final Color mainColor = const Color(0xFF89dad0);
+  static final Color mainBlockColor = const Color(0xFF332d2b);
+  static final Color textColor = const Color(0xFFccc7c5);
+  
 
   static TextStyle titleStyle =
       const TextStyle(color: LightColor.titleTextColor, fontSize: 16);

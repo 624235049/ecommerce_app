@@ -1,4 +1,7 @@
+import 'package:ecommerce_app/src/pages/food_page_body.dart';
 import 'package:ecommerce_app/src/themes/theme.dart';
+import 'package:ecommerce_app/src/widgets/big_text.dart';
+import 'package:ecommerce_app/src/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -22,8 +25,21 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 children: [
                   Column(
                     children: [
-                      Text("Country"),
-                      Text("City"),
+                      BigText(
+                        text: "Thailand",
+                        color: AppTheme.mainColor,
+                      ),
+                      Row(
+                        children: [
+                          SmallText(
+                            text: "Hatyai",
+                            color: Colors.black54,
+                          ),
+                          Icon(
+                            Icons.arrow_drop_down_rounded,
+                          )
+                        ],
+                      ),
                     ],
                   ),
                   Center(
@@ -36,13 +52,14 @@ class _MainFoodPageState extends State<MainFoodPage> {
                       ),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: AppTheme.textColor),
+                          color: AppTheme.mainColor),
                     ),
                   ),
                 ],
               ),
             ),
           ),
+          FoodPageBody(),
         ],
       ),
     );
