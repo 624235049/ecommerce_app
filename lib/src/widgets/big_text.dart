@@ -5,6 +5,9 @@ class BigText extends StatelessWidget {
   final String text;
   double size;
   TextOverflow overflow;
+
+  //ประกาศเรียก Constructor ในwidgetของ BigText นำมาเรียกใช้กำหนด Text "" และ สี ขนาด 
+
   BigText(
       {Key? key,
       this.color = const Color(0xFF332d2b),

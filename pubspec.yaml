@@ -63,6 +63,12 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
+  assets:
+    - assets/image/food1.png
+    - assets/image/food0.jpg
+    - assets/image/food2.jpg
+    - assets/image/food3.jpg
+
   fonts:
       - family: Roboto
         fonts:

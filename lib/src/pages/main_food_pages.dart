@@ -16,51 +16,55 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(top: 45, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      BigText(
-                        text: "Thailand",
-                        color: AppTheme.mainColor,
-                      ),
-                      Row(
-                        children: [
-                          SmallText(
-                            text: "Hatyai",
-                            color: Colors.black54,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down_rounded,
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Container(
-                      width: 45,
-                      height: 45,
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppTheme.mainColor),
+          _buildhead(), //ส่วนHead ของ หน้า Mainfood return Widget
+          FoodPageBody(), //เรียก Widget Page_view หน้า food_page_body
+        ],
+      ),
+    );
+  }
+
+  Widget _buildhead() {
+    return Container(
+      child: Container(
+        margin: EdgeInsets.only(top: 45, bottom: 15),
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                BigText(
+                  text: "Thailand",
+                  color: AppTheme.mainColor,
+                ),
+                Row(
+                  children: [
+                    SmallText(
+                      text: "Hatyai",
+                      color: Colors.black54,
                     ),
-                  ),
-                ],
+                    Icon(
+                      Icons.arrow_drop_down_rounded,
+                    )
+                  ],
+                ),
+              ],
+            ),
+            Center(
+              child: Container(
+                width: 45,
+                height: 45,
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppTheme.mainColor),
               ),
             ),
-          ),
-          FoodPageBody(),
-        ],
+          ],
+        ),
       ),
     );
   }
