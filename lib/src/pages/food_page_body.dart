@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/src/themes/theme.dart';
 import 'package:ecommerce_app/src/widgets/big_text.dart';
 import 'package:ecommerce_app/src/widgets/icon_and_text_widget.dart';
@@ -17,6 +18,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPagevalue = 0.0;
   double _scaleFactor = 0.8;
+  double _height = 220;
 
   @override
   void initState() {
@@ -36,16 +38,31 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.redAccent,
-      height: 320,
-      child: PageView.builder(
-          controller: pageController,
-          itemCount:
-              5, //กำหนด จำนวนของPageview = 5หน้า เก็บไว้ใน index = position
-          itemBuilder: (context, position) {
-            return _buildPageItem(position);
-          }),
+    return Column(
+      children: [
+        Container(
+          // color: Colors.redAccent,
+          height: 320,
+          child: PageView.builder(
+              controller: pageController,
+              itemCount:
+                  5, //กำหนด จำนวนของPageview = 5หน้า เก็บไว้ใน index = position
+              itemBuilder: (context, position) {
+                return _buildPageItem(position);
+              }),
+        ),
+        new DotsIndicator(
+          dotsCount: 5,
+          position: _currPagevalue,
+          decorator: DotsDecorator(
+            activeColor: AppTheme.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 
@@ -53,11 +70,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPagevalue.floor()) {
       var currScale = 1 - (_currPagevalue - index) * (1 - _scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
     } else if (index == _currPagevalue.floor() + 1) {
       var currScale =
           _scaleFactor + (_currPagevalue - index + 1) * (1 - _scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
+    } else if (index == _currPagevalue.floor() - 1) {
+      var currScale = 1 - (_currPagevalue - index) * (1 - _scaleFactor);
+      var currTrans = _height * (1 - currScale) / 2;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1);
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, currTrans, 0);
+    } else {
+      var currScale = 0.8;
+      matrix = Matrix4.diagonal3Values(1, currScale, 1)
+        ..setTranslationRaw(0, _height * (1 - _scaleFactor / 2), 1);
     }
 
     return Transform(
@@ -82,9 +115,23 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               height: 120,
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white,
-              ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFFe8e8e8),
+                      blurRadius: 5.0,
+                      offset: Offset(0, 5),
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-5, 0),
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(5, 0),
+                    ),
+                  ]),
               child: Container(
                 padding: EdgeInsets.only(top: 15, left: 15, right: 15),
                 child: Column(
