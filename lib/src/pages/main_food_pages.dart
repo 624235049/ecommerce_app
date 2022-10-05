@@ -20,7 +20,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
       body: Column(
         children: [
           _buildhead(), //ส่วนHead ของ หน้า Mainfood return Widget
-          FoodPageBody(), //เรียก Widget Page_view หน้า food_page_body
+          Expanded(
+              child: SingleChildScrollView(
+            child: FoodPageBody(),
+          )), //เรียก Widget Page_view หน้า food_page_body
         ],
       ),
     );
