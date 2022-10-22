@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/utils/dimensions.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {

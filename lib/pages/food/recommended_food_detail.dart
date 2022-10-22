@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/src/utils/dimensions.dart';
-import 'package:ecommerce_app/src/utils/theme.dart';
-import 'package:ecommerce_app/src/widgets/app_icon.dart';
-import 'package:ecommerce_app/src/widgets/big_text.dart';
-import 'package:ecommerce_app/src/widgets/exandable_text_widget.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
+import 'package:ecommerce_app/utils/theme.dart';
+import 'package:ecommerce_app/widgets/app_icon.dart';
+import 'package:ecommerce_app/widgets/big_text.dart';
+import 'package:ecommerce_app/widgets/exandable_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class RecommenededFoodDetail extends StatelessWidget {

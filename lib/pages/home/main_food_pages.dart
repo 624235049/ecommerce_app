@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/src/pages/home/food_page_body.dart';
-import 'package:ecommerce_app/src/utils/dimensions.dart';
-import 'package:ecommerce_app/src/utils/theme.dart';
+import 'package:ecommerce_app/pages/home/food_page_body.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
+import 'package:ecommerce_app/utils/theme.dart';
 
-import 'package:ecommerce_app/src/widgets/big_text.dart';
-import 'package:ecommerce_app/src/widgets/small_text.dart';
+import 'package:ecommerce_app/widgets/big_text.dart';
+import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class MainFoodPage extends StatefulWidget {

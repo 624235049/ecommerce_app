@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/src/utils/dimensions.dart';
-import 'package:ecommerce_app/src/utils/theme.dart';
-import 'package:ecommerce_app/src/widgets/small_text.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
+import 'package:ecommerce_app/utils/theme.dart';
+import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableTextWidget extends StatefulWidget {

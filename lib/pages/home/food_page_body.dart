@@ -1,12 +1,16 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:ecommerce_app/src/utils/dimensions.dart';
-import 'package:ecommerce_app/src/utils/theme.dart';
-import 'package:ecommerce_app/src/widgets/app_column.dart';
+import 'package:ecommerce_app/controllers/popular_product_controller.dart';
+import 'package:ecommerce_app/model/products_model.dart';
+import 'package:ecommerce_app/utils/app_constants.dart';
+import 'package:ecommerce_app/utils/dimensions.dart';
+import 'package:ecommerce_app/utils/theme.dart';
+import 'package:ecommerce_app/widgets/app_column.dart';
 
-import 'package:ecommerce_app/src/widgets/big_text.dart';
-import 'package:ecommerce_app/src/widgets/icon_and_text_widget.dart';
-import 'package:ecommerce_app/src/widgets/small_text.dart';
+import 'package:ecommerce_app/widgets/big_text.dart';
+import 'package:ecommerce_app/widgets/icon_and_text_widget.dart';
+import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 //เป็นส่วนpage view แสดง อาหารหน้า   Home ของapp
 
@@ -44,20 +48,46 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //slider section
-        Container(
-          // color: Colors.redAccent,
-          height: Dimensions.pageView,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount:
-                  5, //กำหนด จำนวนของPageview = 5หน้า เก็บไว้ใน index = position
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
+        //slider section popularProductList
+        GetBuilder<PopularProductController>(
+          builder: (popularProducts) {
+            return popularProducts.isLoded
+                ? Container(
+                    // color: Colors.redAccent,
+                    height: Dimensions.pageView,
+                    child: PageView.builder(
+                        controller: pageController,
+                        itemCount: popularProducts.popularProductList
+                            .length, //กำหนด จำนวนของPageview = 5หน้า เก็บไว้ใน index = position
+                        itemBuilder: (context, position) {
+                          return _buildPageItem(position,
+                              popularProducts.popularProductList[position]);
+                        }),
+                  )
+                : CircularProgressIndicator(
+                    color: AppTheme.mainColor,
+                  );
+          },
         ),
+
         //dots
-        dotIndicator(),
+        GetBuilder<PopularProductController>(
+          builder: (popularProducts) {
+            return DotsIndicator(
+              dotsCount: popularProducts.popularProductList.isEmpty
+                  ? 1
+                  : popularProducts.popularProductList.length,
+              position: _currPagevalue,
+              decorator: DotsDecorator(
+                activeColor: AppTheme.mainColor,
+                size: const Size.square(9.0),
+                activeSize: const Size(18.0, 9.0),
+                activeShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+              ),
+            );
+          },
+        ),
         // Popular text
         SizedBox(
           height: Dimensions.height30,
@@ -149,20 +179,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  DotsIndicator dotIndicator() {
-    return new DotsIndicator(
-      dotsCount: 5,
-      position: _currPagevalue,
-      decorator: DotsDecorator(
-        activeColor: AppTheme.mainColor,
-        size: const Size.square(9.0),
-        activeSize: const Size(18.0, 9.0),
-        activeShape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      ),
-    );
-  }
-
   Container popular() {
     return Container(
       margin: EdgeInsets.only(
@@ -171,7 +187,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          BigText(text: "Popular"),
+          BigText(text: "แนะนำ"),
           SizedBox(
             width: Dimensions.width10,
           ),
@@ -194,7 +210,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPagevalue.floor()) {
       var currScale = 1 - (_currPagevalue - index) * (1 - _scaleFactor);
@@ -234,7 +250,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/image/food3.jpg"),
+                image: NetworkImage(
+                    AppConstants.BASE_URL + "/uploads/" + popularProduct.img!),
               ),
             ),
           ),
@@ -270,7 +287,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     left: Dimensions.width15,
                     right: Dimensions.width15),
                 child: AppColumn(
-                  text: "Thai Foods",
+                  text: popularProduct.name!,
                 ),
               ),
             ),
