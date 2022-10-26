@@ -1,25 +1,39 @@
+import 'package:ecommerce_app/controllers/recommended_product_controller.dart';
+import 'package:ecommerce_app/routes/route_helper.dart';
+import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:ecommerce_app/utils/theme.dart';
 import 'package:ecommerce_app/widgets/app_icon.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/exandable_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecommenededFoodDetail extends StatelessWidget {
-  const RecommenededFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommenededFoodDetail({Key? key, required this.pageId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(icon: Icons.clear),
+                ),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -28,7 +42,7 @@ class RecommenededFoodDetail extends StatelessWidget {
               child: Container(
                 child: Center(
                     child: BigText(
-                  text: "Thai Side",
+                  text: product.name!,
                   size: Dimensions.font26,
                 )),
                 width: double.maxFinite,
@@ -46,8 +60,8 @@ class RecommenededFoodDetail extends StatelessWidget {
             backgroundColor: AppTheme.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image/food2.jpg",
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -58,8 +72,8 @@ class RecommenededFoodDetail extends StatelessWidget {
               children: [
                 Container(
                   child: ExpandableTextWidget(
-                      text:
-                          "ร้านเสน่ห์จันทน์ ร้านอาหารไทยรสชาติต้นตำรับ พร้อมเสิร์ฟเมนูอาหารไทยโบราณแบบชาววังแท้ๆ โดดเด่นด้วยรสชาติจากฝีมือเชฟ นอกจากรสชาติจะอร่อยถูกใจคนรักอาหารไทยแล้ว หน้าตาแต่ละเมนูก็สวยเลิศมากๆ เพราะทางร้านค่อนข้างประณีตเลยกว่าจะเสิรฺฟแต่ละเมนู โดยทางร้านก็มีทั้งเมนูคาวและหวานให้เลือกหลากหลายค่ะ เช่น แกงระแวงเนื้อ แกงจีนจ๊วน ต้มยำกุ้ง ข้าวขวัญ ตำรับสายเยาวภา และข้าวเม่าทอดไส้กล้วยค่ะ ทุกเมนูจัดเสิร์ฟในบรรยากาศร้านไทยร่วมสมัย ร้านนี้มีสาขาทั้งหมด 4 สาขาในกรุงเทพ แต่วันนี้เราจะพาไปชมที่สาขา Asiatique ค่ะ ขอบอกเลยว่าบรรยากาศดีมากกกกก เพราะทางร้านมีบริการแบบนั่งทานที่ร้าน และแบบล่องเรือทานอาหารไทยแท้ๆ ชมวิวแม่น้ำเจ้าพระยาสองฝั่ง เมนูทางร้านเป็นเมนูอาหารไทยที่มีให้เลือกแบบหลากหลายแถมยังมีแบบเป็น set อีกด้วยนะคะ เช่น Gold set dinner Platinum set dinner และนอกจากนี้ก็ยังเมนูอื่นๆ เช่น ฉู่ฉี่ปลาบุรี ปลาบุรีทอดสมุนไพร ปลาบุรีนึ่งซีอิ้วร้านเสน่ห์จันทน์ ร้านอาหารไทยรสชาติต้นตำรับ พร้อมเสิร์ฟเมนูอาหารไทยโบราณแบบชาววังแท้ๆ โดดเด่นด้วยรสชาติจากฝีมือเชฟ นอกจากรสชาติจะอร่อยถูกใจคนรักอาหารไทยแล้ว หน้าตาแต่ละเมนูก็สวยเลิศมากๆ เพราะทางร้านค่อนข้างประณีตเลยกว่าจะเสิรฺฟแต่ละเมนู โดยทางร้านก็มีทั้งเมนูคาวและหวานให้เลือกหลากหลายค่ะ เช่น แกงระแวงเนื้อ แกงจีนจ๊วน ต้มยำกุ้ง ข้าวขวัญ ตำรับสายเยาวภา และข้าวเม่าทอดไส้กล้วยค่ะ ทุกเมนูจัดเสิร์ฟในบรรยากาศร้านไทยร่วมสมัย ร้านนี้มีสาขาทั้งหมด 4 สาขาในกรุงเทพ แต่วันนี้เราจะพาไปชมที่สาขา Asiatique ค่ะ ขอบอกเลยว่าบรรยากาศดีมากกกกก เพราะทางร้านมีบริการแบบนั่งทานที่ร้าน และแบบล่องเรือทานอาหารไทยแท้ๆ ชมวิวแม่น้ำเจ้าพระยาสองฝั่ง เมนูทางร้านเป็นเมนูอาหารไทยที่มีให้เลือกแบบหลากหลายแถมยังมีแบบเป็น set อีกด้วยนะคะ เช่น Gold set dinner Platinum set dinner และนอกจากนี้ก็ยังเมนูอื่นๆ เช่น ฉู่ฉี่ปลาบุรี ปลาบุรีทอดสมุนไพร ปลาบุรีนึ่งซีอิ้วร้านเสน่ห์จันทน์ ร้านอาหารไทยรสชาติต้นตำรับ พร้อมเสิร์ฟเมนูอาหารไทยโบราณแบบชาววังแท้ๆ โดดเด่นด้วยรสชาติจากฝีมือเชฟ นอกจากรสชาติจะอร่อยถูกใจคนรักอาหารไทยแล้ว หน้าตาแต่ละเมนูก็สวยเลิศมากๆ เพราะทางร้านค่อนข้างประณีตเลยกว่าจะเสิรฺฟแต่ละเมนู โดยทางร้านก็มีทั้งเมนูคาวและหวานให้เลือกหลากหลายค่ะ เช่น แกงระแวงเนื้อ แกงจีนจ๊วน ต้มยำกุ้ง ข้าวขวัญ ตำรับสายเยาวภา และข้าวเม่าทอดไส้กล้วยค่ะ ทุกเมนูจัดเสิร์ฟในบรรยากาศร้านไทยร่วมสมัย ร้านนี้มีสาขาทั้งหมด 4 สาขาในกรุงเทพ แต่วันนี้เราจะพาไปชมที่สาขา Asiatique ค่ะ ขอบอกเลยว่าบรรยากาศดีมากกกกก เพราะทางร้านมีบริการแบบนั่งทานที่ร้าน และแบบล่องเรือทานอาหารไทยแท้ๆ ชมวิวแม่น้ำเจ้าพระยาสองฝั่ง เมนูทางร้านเป็นเมนูอาหารไทยที่มีให้เลือกแบบหลากหลายแถมยังมีแบบเป็น set อีกด้วยนะคะ เช่น Gold set dinner Platinum set dinner และนอกจากนี้ก็ยังเมนูอื่นๆ เช่น ฉู่ฉี่ปลาบุรี ปลาบุรีทอดสมุนไพร ปลาบุรีนึ่งซีอิ้วร้านเสน่ห์จันทน์ ร้านอาหารไทยรสชาติต้นตำรับ พร้อมเสิร์ฟเมนูอาหารไทยโบราณแบบชาววังแท้ๆ โดดเด่นด้วยรสชาติจากฝีมือเชฟ นอกจากรสชาติจะอร่อยถูกใจคนรักอาหารไทยแล้ว หน้าตาแต่ละเมนูก็สวยเลิศมากๆ เพราะทางร้านค่อนข้างประณีตเลยกว่าจะเสิรฺฟแต่ละเมนู โดยทางร้านก็มีทั้งเมนูคาวและหวานให้เลือกหลากหลายค่ะ เช่น แกงระแวงเนื้อ แกงจีนจ๊วน ต้มยำกุ้ง ข้าวขวัญ ตำรับสายเยาวภา และข้าวเม่าทอดไส้กล้วยค่ะ ทุกเมนูจัดเสิร์ฟในบรรยากาศร้านไทยร่วมสมัย ร้านนี้มีสาขาทั้งหมด 4 สาขาในกรุงเทพ แต่วันนี้เราจะพาไปชมที่สาขา Asiatique ค่ะ ขอบอกเลยว่าบรรยากาศดีมากกกกก เพราะทางร้านมีบริการแบบนั่งทานที่ร้าน และแบบล่องเรือทานอาหารไทยแท้ๆ ชมวิวแม่น้ำเจ้าพระยาสองฝั่ง เมนูทางร้านเป็นเมนูอาหารไทยที่มีให้เลือกแบบหลากหลายแถมยังมีแบบเป็น set อีกด้วยนะคะ เช่น Gold set dinner Platinum set dinner และนอกจากนี้ก็ยังเมนูอื่นๆ เช่น ฉู่ฉี่ปลาบุรี ปลาบุรีทอดสมุนไพร ปลาบุรีนึ่งซีอิ้ว"),
+                    text: product.description,
+                  ),
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
                 ),
@@ -87,7 +101,7 @@ class RecommenededFoodDetail extends StatelessWidget {
                     backgroundColor: AppTheme.mainColor,
                     icon: Icons.remove),
                 BigText(
-                  text: "\$1288 " + "x" + " 0 ",
+                  text: "\$  ${product.price!}x +  0 ",
                   color: AppTheme.mainBlockColor,
                   size: Dimensions.font26,
                 ),

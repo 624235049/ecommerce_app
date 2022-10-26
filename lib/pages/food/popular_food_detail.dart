@@ -1,3 +1,6 @@
+import 'package:ecommerce_app/controllers/popular_product_controller.dart';
+import 'package:ecommerce_app/pages/home/main_food_pages.dart';
+import 'package:ecommerce_app/utils/app_constants.dart';
 import 'package:ecommerce_app/utils/dimensions.dart';
 import 'package:ecommerce_app/utils/theme.dart';
 import 'package:ecommerce_app/widgets/app_column.dart';
@@ -5,12 +8,18 @@ import 'package:ecommerce_app/widgets/app_icon.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/exandable_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    print("page is id ==" + pageId.toString());
+    print("product name is " + product.name);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -25,7 +34,9 @@ class PopularFoodDetail extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/image/food2.jpg"),
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.UPLOAD_URL +
+                      product.img!),
                 ),
               ),
             ),
@@ -38,7 +49,11 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: (() {
+                      Get.to(() => MainFoodPage());
+                    }),
+                    child: AppIcon(icon: Icons.arrow_back_ios)),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -64,7 +79,7 @@ class PopularFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppColumn(text: "ชุดเซ็ท : อาหารไทย"),
+                  AppColumn(text: product.name!),
                   SizedBox(
                     height: Dimensions.height20,
                   ),
@@ -74,9 +89,7 @@ class PopularFoodDetail extends StatelessWidget {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                          text:
-                              "ร้านเสน่ห์จันทน์ ร้านอาหารไทยรสชาติต้นตำรับ พร้อมเสิร์ฟเมนูอาหารไทยโบราณแบบชาววังแท้ๆ โดดเด่นด้วยรสชาติจากฝีมือเชฟ นอกจากรสชาติจะอร่อยถูกใจคนรักอาหารไทยแล้ว หน้าตาแต่ละเมนูก็สวยเลิศมากๆ เพราะทางร้านค่อนข้างประณีตเลยกว่าจะเสิรฺฟแต่ละเมนู โดยทางร้านก็มีทั้งเมนูคาวและหวานให้เลือกหลากหลายค่ะ เช่น แกงระแวงเนื้อ แกงจีนจ๊วน ต้มยำกุ้ง ข้าวขวัญ ตำรับสายเยาวภา และข้าวเม่าทอดไส้กล้วยค่ะ ทุกเมนูจัดเสิร์ฟในบรรยากาศร้านไทยร่วมสมัย ร้านนี้มีสาขาทั้งหมด 4 สาขาในกรุงเทพ แต่วันนี้เราจะพาไปชมที่สาขา Asiatique ค่ะ ขอบอกเลยว่าบรรยากาศดีมากกกกก เพราะทางร้านมีบริการแบบนั่งทานที่ร้าน และแบบล่องเรือทานอาหารไทยแท้ๆ ชมวิวแม่น้ำเจ้าพระยาสองฝั่ง เมนูทางร้านเป็นเมนูอาหารไทยที่มีให้เลือกแบบหลากหลายแถมยังมีแบบเป็น set อีกด้วยนะคะ เช่น Gold set dinner Platinum set dinner และนอกจากนี้ก็ยังเมนูอื่นๆ เช่น ฉู่ฉี่ปลาบุรี ปลาบุรีทอดสมุนไพร ปลาบุรีนึ่งซีอิ้ว"),
+                      child: ExpandableTextWidget(text: product.description!),
                     ),
                   ),
                 ],
@@ -142,7 +155,7 @@ class PopularFoodDetail extends StatelessWidget {
                 right: Dimensions.width20,
               ),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\$ ${product.price}" + " | Add to cart",
                 color: Colors.white,
               ),
               decoration: BoxDecoration(
