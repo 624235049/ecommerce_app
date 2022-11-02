@@ -189,6 +189,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                                 icon: Icons.access_time_rounded,
                                                 text: "32min",
                                                 iconColor: AppTheme.iconColor2),
+                                                
                                           ],
                                         ),
                                       ],

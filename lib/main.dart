@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/controllers/popular_product_controller.dart';
 import 'package:ecommerce_app/controllers/recommended_product_controller.dart';
+import 'package:ecommerce_app/pages/cart/cart_page.dart';
 import 'package:ecommerce_app/pages/home/main_food_pages.dart';
 import 'package:ecommerce_app/routes/route_helper.dart';
 import 'package:flutter/material.dart';
