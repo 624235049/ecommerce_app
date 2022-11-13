@@ -71,6 +71,8 @@ flutter:
     - assets/image/food0.jpg
     - assets/image/food2.jpg
     - assets/image/food3.jpg
+    - assets/image/splash_part_1.png
+    - assets/image/splash_part_2.png
 
   fonts:
       - family: Roboto
