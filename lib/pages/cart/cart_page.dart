@@ -254,7 +254,6 @@ class CartPage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      
                       SizedBox(
                         width: Dimensions.width10 / 2,
                       ),
@@ -267,9 +266,7 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // popularProduct.addItem(product);
-                  },
+                  onTap: () {},
                   child: Container(
                     padding: EdgeInsets.only(
                       top: Dimensions.height20,
