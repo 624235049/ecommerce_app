@@ -32,6 +32,7 @@ dependencies:
   get: ^4.1.4
   dots_indicator: ^2.0.0
   shared_preferences: ^2.0.12
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -74,6 +75,8 @@ flutter:
     - assets/image/food3.jpg
     - assets/image/splash_part_1.png
     - assets/image/splash_part_2.png
+    - assets/image/empty-cart.png
+    - assets/image/empty_box.jpg
 
   fonts:
       - family: Roboto
