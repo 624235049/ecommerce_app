@@ -33,6 +33,10 @@ dependencies:
   dots_indicator: ^2.0.0
   shared_preferences: ^2.0.12
   intl: ^0.17.0
+  flutter_launcher_icons: ^0.10.0
+
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
